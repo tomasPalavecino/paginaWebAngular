@@ -12,6 +12,7 @@ export class ProductDetailComponent implements OnInit{
   product?: Product;
   productList: Product[] = productsList;
   loading: boolean = true;
+  color: string = '';
 
   constructor(private _route: ActivatedRoute){}
 
