@@ -20,6 +20,7 @@ export class ProductDetailComponent implements OnInit{
     setTimeout(() =>{
       this._route.params.subscribe(param =>{
         this.product = this.productList.find(product => product.id == param['productId']);
+        this.color = this.product?.price as number > 5 ? 'red' : '';
         this.loading = false;
       });
     }, 1500);
