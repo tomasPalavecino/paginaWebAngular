@@ -1,1 +1,18 @@
-<p>contact works!</p>
+<div class="container">
+    <form [formGroup]="formularioContacto" (ngSubmit)="enviar()">
+        <div class="mb-3">
+          <label for="name" class="form-label">Nombre</label>
+          <input [ngClass]="{'is-invalid': hasErrors('name', 'required')}" 
+          type="text" class="form-control" id="name" formControlName="name">
+          <div class="text-danger" *ngIf="hasErrors('name', 'required')">Nombre requerido.</div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input [ngClass]="{'is-invalid': hasErrors('email', 'required') || hasErrors('email', 'email')}" 
+          type="email" class="form-control" id="email" formControlName="email">
+          <div class="text-danger" *ngIf="hasErrors('email', 'email')">Email formato inválido.</div>
+          <div class="text-danger" *ngIf="hasErrors('email', 'required')">Email requerido.</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </form>
+</div>
