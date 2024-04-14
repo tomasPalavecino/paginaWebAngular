@@ -1,1 +1,3 @@
-<h3>Aqui esta el producto: {{product?.name}}</h3>
+<h3>Producto: {{product?.name}}</h3>
+<h4>Precio: {{product?.price | currency}}</h4>
+<h5 *ngIf="product?.description">Descripción: {{product?.description}}</h5>
