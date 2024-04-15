@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ContactComponent implements OnInit{
 
 formularioContacto: FormGroup;
+tipoDni: string = 'DNI';
 usuarioActivo: any = {
   name: 'Pedro',
   apellido: 'Pepe',
@@ -21,10 +22,14 @@ constructor(private form: FormBuilder){
     apellido: [''],
     dni: [''],
     email: ['', [Validators.required, Validators.email]],
+    tipoDni: [''],
   });
 }
 
 ngOnInit(): void {
+  this.formularioContacto.get('tipoDni')?.valueChanges.subscribe(value =>{
+    this.tipoDni = value;
+  })
   this.formularioContacto.get('apellido')?.setValidators([Validators.required, Validators.minLength(3)]);
   this.formularioContacto.get('dni')?.setValidators([Validators.required, Validators.minLength(3)]);
   this.formularioContacto.patchValue({
