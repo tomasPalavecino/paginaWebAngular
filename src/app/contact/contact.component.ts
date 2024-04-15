@@ -18,13 +18,15 @@ usuarioActivo: any = {
 constructor(private form: FormBuilder){
   this.formularioContacto = this.form.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
-    apellido: ['', [Validators.required, Validators.minLength(3)]],
-    dni: ['', [Validators.required, Validators.minLength(3)]],
+    apellido: [''],
+    dni: [''],
     email: ['', [Validators.required, Validators.email]],
   });
 }
 
 ngOnInit(): void {
+  this.formularioContacto.get('apellido')?.setValidators([Validators.required, Validators.minLength(3)]);
+  this.formularioContacto.get('dni')?.setValidators([Validators.required, Validators.minLength(3)]);
   this.formularioContacto.patchValue({
     name: this.usuarioActivo.name,
     apellido: this.usuarioActivo.apellido,
