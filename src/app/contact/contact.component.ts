@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -6,15 +6,33 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit{
 
 formularioContacto: FormGroup;
+usuarioActivo: any = {
+  name: 'Pedro',
+  apellido: 'Pepe',
+  dni: '123485',
+}
 
 constructor(private form: FormBuilder){
   this.formularioContacto = this.form.group({
-    name: ['', Validators.required],
+    name: ['', [Validators.required, Validators.minLength(3)]],
+    apellido: ['', [Validators.required, Validators.minLength(3)]],
+    dni: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
   });
+}
+
+ngOnInit(): void {
+  this.formularioContacto.patchValue({
+    name: this.usuarioActivo.name,
+    apellido: this.usuarioActivo.apellido,
+    dni: this.usuarioActivo.dni,
+  });
+  this.formularioContacto.get('name')?.disable();
+  this.formularioContacto.get('apellido')?.disable();
+  this.formularioContacto.get('dni')?.disable();
 }
 
 hasErrors(controlName: string, errorType: string){
