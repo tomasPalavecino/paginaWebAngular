@@ -14,7 +14,8 @@ usuarioActivo: any = {
   name: 'Pedro',
   apellido: 'Pepe',
   dni: '123485',
-}
+};
+mostratDni : boolean = false;
 
 constructor(private form: FormBuilder){
   this.formularioContacto = this.form.group({
@@ -27,6 +28,7 @@ constructor(private form: FormBuilder){
 
 ngOnInit(): void {
   this.formularioContacto.get('tipoDni')?.valueChanges.subscribe(value =>{
+    this.mostratDni = value != '';
     this.tipoDni = value;
   })
   this.formularioContacto.get('apellido')?.setValidators([Validators.required, Validators.minLength(3)]);
